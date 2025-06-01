@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import assets, { messagesDummyData } from '../assets/assets'
+import { formatMessageTime } from '../lib/utils';
 
 const ChatContainer = ({ selectedUser, setSelectedUser }) => {
 
@@ -36,13 +37,27 @@ const ChatContainer = ({ selectedUser, setSelectedUser }) => {
             )}
             <div className='text-center text-xs'>
               <img src={msg.senderId === '680f50e4f10f3cd28382ecf9' ? assets.avatar_icon : assets.profile_martin} alt="" className='w-7 rounded-full' />
-              <p className='text-gray-500'>{msg.createdAt}</p>
+              <p className='text-gray-500'>{formatMessageTime(msg.createdAt)}</p>
             </div>
           </div>
         )) }
         <div ref={scrollEnd}></div>  
+      </div>
+      
+
+      {/* |||||||||| BOTTOM AREA |||||||||| */}
+      <div className='absolute bottom-0 left-0 right-0 flex items-center gap-3 p-3'>
+        <div>
+          <input type="text" placeholder='Send a message' />
+          <input type="file" id='image' accept='image/png, image/jpeg' hidden />
+          <label htmlFor="image">
+            <img src={assets.gallery_icon} alt="" className='w-5 mr-2 cursor-pointer' />
+          </label>
+        </div>
 
       </div>
+        
+
     </div>
   ) : (
     <div className='flex flex-col items-center justify-center gap-2 text-gray-500 bg-white/10 max-md:hidden'>
